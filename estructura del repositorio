@@ -1,0 +1,6 @@
+sistema-libros-electronicos/
+│── docs/
+│   └── documentacion.pdf
+│── src/
+│   └── main.py
+│── README.md
