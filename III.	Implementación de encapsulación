@@ -1,0 +1,23 @@
+class Libro:
+    def __init__(self, titulo, autor, categoria, archivo):
+        self.__titulo = titulo
+        self.__autor = autor
+        self.__categoria = categoria
+        self.__archivo = archivo
+        self.__disponible = True
+
+    # Getters y setters
+    def get_titulo(self):
+        return self.__titulo
+    
+    def set_titulo(self, nuevo_titulo):
+        self.__titulo = nuevo_titulo
+
+    def is_disponible(self):
+        return self.__disponible
+    
+    def prestar(self):
+        if self.__disponible:
+            self.__disponible = False
+        else:
+            raise Exception("El libro no está disponible")
