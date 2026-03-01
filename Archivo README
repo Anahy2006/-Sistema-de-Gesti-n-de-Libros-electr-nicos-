@@ -1,0 +1,79 @@
+# Sistema Web de Biblioteca Electrónica
+
+## Integración Final – Programación Orientada a Objetos
+
+### Integrantes:
+Daniela Paillacho  
+Carrera: Ingeniería en Software  
+Universidad Internacional del Ecuador  
+
+### Fecha:
+2026
+
+---
+
+## 🎯 Objetivo del Programa
+
+Desarrollar un sistema web de gestión de libros electrónicos aplicando:
+
+- Programación Orientada a Objetos
+- Concurrencia
+- Base de datos SQLite
+- Servicios Web REST
+- Serialización JSON
+
+---
+
+## ⚙ Funcionalidades Principales
+
+- Registro de usuarios
+- Autenticación
+- Registro de libros
+- Consulta de libros
+- Préstamo de libros
+- Control de disponibilidad
+- API REST con 8 servicios web
+- Serialización JSON
+
+---
+
+## 🌐 Servicios Web Implementados
+
+1. Obtener todos los libros
+2. Obtener libro por ID
+3. Crear libro
+4. Actualizar libro
+5. Eliminar libro
+6. Registrar usuario
+7. Login API
+8. Registrar préstamo
+
+---
+
+## 🛠 Tecnologías Utilizadas
+
+- Python
+- Flask
+- SQLite
+- JSON
+- GitHub
+- Gunicorn
+
+---
+
+## 🚀 Futuro del Proyecto
+
+El sistema puede evolucionar hacia:
+- Microservicios
+- Integración con aplicaciones móviles
+- Uso de bases de datos distribuidas
+- Implementación de Inteligencia Artificial para recomendación de libros
+- Despliegue en la nube con Kubernetes
+
+---
+
+## 📌 Conclusión
+
+Este proyecto permitió integrar los conocimientos de las 8 semanas,
+aplicando POO, concurrencia, servicios web y serialización JSON,
+construyendo una solución funcional y escalable.
