@@ -1,0 +1,32 @@
++----------------+
+|     Libro      |
++----------------+
+| - titulo       |
+| - autor        |
+| - isbn         |
+| - formato      |
+| - disponible   |
++----------------+
+| + prestar()    |
+| + devolver()   |
++----------------+
+
++----------------+
+|    Usuario     |
++----------------+
+| - nombre       |
+| - correo       |
+| - historial    |
++----------------+
+| + agregar_prestamo() |
++----------------+
+
++----------------+
+|    Prestamo    |
++----------------+
+| - libro        |
+| - usuario      |
+| - fecha_inicio |
+| - fecha_fin    |
+| - estado       |
++----------------+
