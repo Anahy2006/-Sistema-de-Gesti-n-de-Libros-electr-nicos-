@@ -1,0 +1,16 @@
+class Libro:
+    def __init__(self, titulo, autor, isbn, formato, disponible=True):
+        self.__titulo = titulo
+        self.__autor = autor
+        self.__isbn = isbn
+        self.__formato = formato
+        self.__disponible = disponible
+
+    def prestar(self):
+        if self.__disponible:
+            self.__disponible = False
+            return True
+        return False
+
+    def devolver(self):
+        self.__disponible = True
