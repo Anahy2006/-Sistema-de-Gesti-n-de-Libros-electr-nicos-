@@ -1,0 +1,87 @@
+from flask import Blueprint, jsonify, request
+from database import get_connection
+
+api = Blueprint("api", __name__)
+
+# 1️⃣ Obtener todos los libros
+@api.route("/api/libros", methods=["GET"])
+def obtener_libros():
+    conn = get_connection()
+    libros = conn.execute("SELECT * FROM libros").fetchall()
+    conn.close()
+    return jsonify([dict(libro) for libro in libros])
+
+# 2️⃣ Obtener libro por ID
+@api.route("/api/libros/<int:id>", methods=["GET"])
+def obtener_libro(id):
+    conn = get_connection()
+    libro = conn.execute("SELECT * FROM libros WHERE id=?", (id,)).fetchone()
+    conn.close()
+    return jsonify(dict(libro))
+
+# 3️⃣ Crear libro
+@api.route("/api/libros", methods=["POST"])
+def crear_libro():
+    data = request.json
+    conn = get_connection()
+    conn.execute("INSERT INTO libros (titulo, autor, isbn) VALUES (?, ?, ?)",
+                 (data["titulo"], data["autor"], data["isbn"]))
+    conn.commit()
+    conn.close()
+    return jsonify({"mensaje": "Libro creado correctamente"})
+
+# 4️⃣ Actualizar libro
+@api.route("/api/libros/<int:id>", methods=["PUT"])
+def actualizar_libro(id):
+    data = request.json
+    conn = get_connection()
+    conn.execute("UPDATE libros SET titulo=?, autor=? WHERE id=?",
+                 (data["titulo"], data["autor"], id))
+    conn.commit()
+    conn.close()
+    return jsonify({"mensaje": "Libro actualizado"})
+
+# 5️⃣ Eliminar libro
+@api.route("/api/libros/<int:id>", methods=["DELETE"])
+def eliminar_libro(id):
+    conn = get_connection()
+    conn.execute("DELETE FROM libros WHERE id=?", (id,))
+    conn.commit()
+    conn.close()
+    return jsonify({"mensaje": "Libro eliminado"})
+
+# 6️⃣ Registrar usuario
+@api.route("/api/usuarios", methods=["POST"])
+def registrar_usuario():
+    data = request.json
+    conn = get_connection()
+    conn.execute("INSERT INTO usuarios (nombre, correo, password, rol) VALUES (?, ?, ?, ?)",
+                 (data["nombre"], data["correo"], data["password"], "lector"))
+    conn.commit()
+    conn.close()
+    return jsonify({"mensaje": "Usuario registrado"})
+
+# 7️⃣ Login API
+@api.route("/api/login", methods=["POST"])
+def login_api():
+    data = request.json
+    conn = get_connection()
+    user = conn.execute("SELECT * FROM usuarios WHERE correo=?",
+                        (data["correo"],)).fetchone()
+    conn.close()
+
+    if user:
+        return jsonify({"mensaje": "Login exitoso"})
+    return jsonify({"mensaje": "Usuario no encontrado"})
+
+# 8️⃣ Registrar préstamo
+@api.route("/api/prestamo", methods=["POST"])
+def registrar_prestamo():
+    data = request.json
+    conn = get_connection()
+    conn.execute("UPDATE libros SET disponible=0 WHERE id=?", (data["libro_id"],))
+    conn.execute("INSERT INTO prestamos (libro_id, usuario_id, fecha) VALUES (?, ?, datetime('now'))",
+                 (data["libro_id"], data["usuario_id"]))
+    conn.commit()
+    conn.close()
+    return jsonify({"mensaje": "Préstamo registrado"})
